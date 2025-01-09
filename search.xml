@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>RustDesk远程桌面简单使用教程</title>
+      <link href="/posts/613a/"/>
+      <url>/posts/613a/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="RustDesk介绍"><a href="#RustDesk介绍" class="headerlink" title="RustDesk介绍"></a>RustDesk介绍</h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> RustDesk </tag>
+            
+            <tag> Docker </tag>
+            
+            <tag> NAS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何在 alpine docker 容器中开启 ssh</title>
+      <link href="/posts/ee98/"/>
+      <url>/posts/ee98/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="配置与开启-ssh"><a href="#配置与开启-ssh" class="headerlink" title="配置与开启 ssh"></a>配置与开启 ssh</h1><p>使用 apk add 来安装应用，这样装上 openssh 和 openrc</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apk add openssh</span><br><span class="line">apk add openrc</span><br></pre></td></tr></table></figure><blockquote><p>OpenRC 是一个用于 Linux 系统的初始化系统和服务管理器。它最初是为 Gentoo Linux 开发的，后来也被广泛地用于其他 Linux 发行版，特别是一些轻量级的发行版，如 Alpine Linux。OpenRC 的目标是提供一种简单而可靠的初始化和服务管理解决方案，它与传统的 sysvinit 和较新的 systemd 相比，更轻量级且易于配置。</p></blockquote><p>之后修改 ssh 的配置文件，使用 vim 来打开</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure><p>找到 #PermitRootLogin prohibit-password 把前面的 # 去掉，然后把 prohibit-password 改为 yes。再把 PasswordAuthentication yes 前面的 # 去掉。</p><p><img src="/posts/ee98/image-20241010140820726.png" alt="image-20241010140820726"></p><p>让 sshd 在容器启动时自启动（可以理解为开机自启，把容器当成一台机器）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-update add sshd</span><br></pre></td></tr></table></figure><p>先执行下面这个命令，要不然会报错</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> /run/openrc/softlevel</span><br></pre></td></tr></table></figure><p>然后执行命令，启动sshd</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-service sshd start</span><br></pre></td></tr></table></figure><p>查看状态可以用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-service sshd status</span><br></pre></td></tr></table></figure><p>如果直接使用ssh连接，但是并不知道密码，需要自己手动设置一个，输入 passwd 就可以设置密码。</p><p>参考文档：<a href="https://blog.powersee.top/2023/08/alpine-docker-ssh/">如何在 alpine docker 容器中开启 ssh</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> Alpine </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>YouTube下载1080教程</title>
+      <link href="/posts/badc/"/>
+      <url>/posts/badc/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="YouTube下载1080教程"><a href="#YouTube下载1080教程" class="headerlink" title="YouTube下载1080教程"></a>YouTube下载1080教程</h1><p><strong>2024年8月29日更新。</strong></p><p>原理是利用在线视频转换网站来解析YouTube(油管)视频地址，从而实现下载YouTube(油管)视频的目的。有的网站可以下载1080p及以上清晰度视频，比如2k、4k、8k，前提是视频本身上传时具有该清晰度。下载的视频含声音。高清晰视频播放器推荐PotPlayer。</p><hr><p>翻墙打开视频转换网站：</p><p>网站1：<a href="https://youtube4kdownloader.com/">https://youtube4kdownloader.com</a> （视频质量最高设置为4k）</p><p>网站2：<a href="https://zh.loader.to/1/1080p-video-downloader.html">https://zh.loader.to/1/1080p-video-downloader.html</a> （视频质量最高设置为1080p，太高无法下载）</p><p>网站3：<a href="https://9convert.com/zh-tw425">https://9convert.com/zh-tw425</a> （视频质量最高设置为1080p）</p><p>网站4：<a href="https://yt5s.biz/zh-cn">https://yt5s.biz/zh-cn</a> （视频质量最高设置为4K）</p><p>网站5：<a href="https://ddownr.com/zh/youtube-video-downloader">https://ddownr.com/zh/youtube-video-downloader</a> （视频质量最高设置为1440p）</p><p>网站6：<a href="https://downmp3.yt/zhCH/youtube-video-downloader">https://downmp3.yt/zhCH/youtube-video-downloader</a> （视频质量最高设置为1440p）</p><p>网站7：<a href="https://www.y2mate.com/en858/download-youtube">https://www.y2mate.com/en858/download-youtube</a> （视频质量最高设置为1440p）</p><p>网站8：<a href="https://yt1d.com/zh-tw">https://yt1d.com/zh-tw</a> （视频质量最高设置为4k）</p><hr><h1 id="搬运自github-Alvin9999"><a href="#搬运自github-Alvin9999" class="headerlink" title="搬运自github&#x2F;Alvin9999"></a>搬运自<a href="https://github.com/Alvin9999/new-pac/wiki/YouTube%E4%B8%8B%E8%BD%BD1080%E6%95%99%E7%A8%8B">github&#x2F;Alvin9999</a></h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> 随手记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MAC必备软件</title>
+      <link href="/posts/ea2b/"/>
+      <url>/posts/ea2b/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>由于经常会硬盘大小有限，所以会经常重装系统。但是有些软件并不是安装即用，所有本篇文章。旨在重装系统之后能够快速使用。（记性差，容易忘，写篇文章记录一下）</p><h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>本文章中所涉及到的软件均收集自网络，如有违规联系侵删。</p><h1 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote><p>Alfred 是由 Running with Crayons Ltd 开发的一款适用于 macOS 的应用程序启动器和生产力软件。它可以更快地访问应用程序、文件、文件夹、字典和各种系统功能。<br>比系统自带的聚焦更好用</p></blockquote><h2 id="食用方法"><a href="#食用方法" class="headerlink" title="食用方法"></a>食用方法</h2><ol><li><p><a href="https://unpkg.com/blog4image@1.0.3/software/Alfred%205%205.5%20[MacKed].dmg">下载alfred</a></p></li><li><p>配置有道翻译，<a href="https://github.com/wensonsmith/YoudaoTranslator">下载有道词典workflow</a>。根据自己的需求下载相应的版本。<img src="/posts/ea2b/image-20240912154914668.png" alt="image-20240912154914668"></p></li><li><p>因为使用的是网易有道词典翻译，所有需要进入<a href="https://link.juejin.cn/?target=http://ai.youdao.com/">网易有道智云官网页面</a>注册账号</p></li><li><p>登录后，点击”自然语言翻译”-&gt;”文本翻译”-&gt;”创建应用”</p></li></ol><p><img src="/posts/ea2b/image-20240912155326454.png" alt="image-20240912155326454"></p><p>服务选择<code>文本翻译</code>，接入方式选择<code>API</code>，其他两个随便填。</p><p><img src="/posts/ea2b/image-20240912155434644.png" alt="image-20240912155434644"><img src="/posts/ea2b/image-20240912155628079.png" alt="image-20240912155628079"></p><ol start="5"><li><p>将第二步下载的zip解压，打开alfred软件，将解压后的文件拖入到软件中</p><p><img src="/posts/ea2b/image-20240912155950314.png" alt="image-20240912155950314"></p></li><li><p>key对应着应用ID，secret对用着密钥，填好之后保存就可以了。</p><p><img src="/posts/ea2b/image-20240912160106629.png" alt="image-20240912160106629">7. 测试一下</p><p><img src="/posts/ea2b/image-20240912160206524.png" alt="image-20240912160206524"></p></li></ol><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://juejin.cn/post/6844903708988276743">稀土掘金-南方小菜</a></p><p><a href="https://github.com/wensonsmith/YoudaoTranslator">github-wensonsmith</a></p><h1 id="Snipaste"><a href="#Snipaste" class="headerlink" title="Snipaste"></a>Snipaste</h1><p>Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！下载并打开 Snipaste，按下 <code>F1</code> 来开始截图，再按 <code>F3</code>，截图就在桌面置顶显示了。就这么简单！<br>Snipaste 是免费软件，它也很安全，没有广告、不会扫描你的硬盘、更不会上传用户数据，它只做它应该做的事。</p><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://zh.snipaste.com/download.html">官方下载地址</a><br><a href="http://dsm.ailx1101.asia:5244/d/aliyun_bak/MAC%E8%BD%AF%E4%BB%B6/Snipaste-2.8.6-Beta.dmg">国内直链下载地址（Snipaste-2.8.6-Beta.dmg）</a></p><h2 id="解锁专业版"><a href="#解锁专业版" class="headerlink" title="解锁专业版"></a>解锁专业版</h2><p>如果有条件可以解锁专业版体验更多强大功能。<a href="https://docs.snipaste.com/zh-cn/pro?id=snipaste-2-%E4%B8%93%E4%B8%9A%E7%89%88%E5%85%8D%E8%B4%B9%E7%89%88-%E5%AF%B9%E6%AF%94">Snipaste 2 专业版&#x2F;免费版 对比</a></p><h1 id="V2ray-U-64"><a href="#V2ray-U-64" class="headerlink" title="V2ray-U-64"></a>V2ray-U-64</h1><p>不多介绍了。dddd</p><h2 id="下载地址-1"><a href="#下载地址-1" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="https://github.com/yanue/V2rayU/releases">github下载页</a></p><p><a href="http://dsm.ailx1101.asia:5244/d/aliyun_bak/MAC%E8%BD%AF%E4%BB%B6/V2rayU-64.dmg">国内直链下载地址</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> MAC </tag>
+            
+            <tag> 软件推荐 </tag>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用 pve 安装 alpine 系统</title>
+      <link href="/posts/d21f/"/>
+      <url>/posts/d21f/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="使用模板-CT-方式-（推荐）"><a href="#使用模板-CT-方式-（推荐）" class="headerlink" title="使用模板 CT 方式 （推荐）"></a>使用模板 CT 方式 （推荐）</h1><h2 id="1-先点击-local-CT-模板-模板，从-清华源-下载后上传，速度会快一些"><a href="#1-先点击-local-CT-模板-模板，从-清华源-下载后上传，速度会快一些" class="headerlink" title="1. 先点击 local -&gt; CT 模板 -&gt; 模板，从 清华源 下载后上传，速度会快一些"></a>1. 先点击 local -&gt; CT 模板 -&gt; 模板，从 <a href="https://mirrors.ustc.edu.cn/proxmox/images/system/">清华源</a> 下载后上传，速度会快一些</h2><h2 id="2-点击右上角创建-CT，并选择刚刚下载的模板，根据自己的实际情况设置好，然后启动。"><a href="#2-点击右上角创建-CT，并选择刚刚下载的模板，根据自己的实际情况设置好，然后启动。" class="headerlink" title="2.点击右上角创建 CT，并选择刚刚下载的模板，根据自己的实际情况设置好，然后启动。"></a>2.点击右上角创建 CT，并选择刚刚下载的模板，根据自己的实际情况设置好，然后启动。</h2><h2 id="3-更改alpine源清华源"><a href="#3-更改alpine源清华源" class="headerlink" title="3.更改alpine源清华源"></a>3.更改alpine源<a href="https://mirrors.tuna.tsinghua.edu.cn/help/alpine/">清华源</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /etc/apk/repositories /etc/apk/repositories.bak</span><br><span class="line">sed -i <span class="string">&#x27;s/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g&#x27;</span> /etc/apk/repositories</span><br><span class="line">apk update</span><br></pre></td></tr></table></figure><h2 id="4-修改时区-如果没有在安装时指定时区，可以通过如下方法更改。"><a href="#4-修改时区-如果没有在安装时指定时区，可以通过如下方法更改。" class="headerlink" title="4.修改时区 如果没有在安装时指定时区，可以通过如下方法更改。"></a>4.修改时区 如果没有在安装时指定时区，可以通过如下方法更改。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">date</span></span><br><span class="line">apk add tzdata</span><br><span class="line"><span class="built_in">cp</span> /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Asia/Shanghai&quot;</span> &gt; /etc/timezone</span><br><span class="line">apk del tzdata</span><br><span class="line"><span class="built_in">date</span></span><br></pre></td></tr></table></figure><h2 id="5-开启-ssh"><a href="#5-开启-ssh" class="headerlink" title="5. 开启 ssh"></a>5. 开启 ssh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apk add openssh-server openssh-client</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PermitRootLogin  yes&quot;</span> &gt;&gt; /etc/ssh/sshd_config</span><br><span class="line">rc-update add sshd <span class="comment"># 开机启动</span></span><br><span class="line">service sshd start</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> docker </tag>
+            
+            <tag> alpine </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>启用abbrlink后asset-image不显示图片解决办法</title>
+      <link href="/posts/4bec/"/>
+      <url>/posts/4bec/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="问题-错误"><a href="#问题-错误" class="headerlink" title="问题&#x2F;错误"></a>问题&#x2F;错误</h1><p>启用abbrlink后文章地址会变成<code>http://localhost:4000/posts/18f7.html</code>导致图片获取失败</p><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>修改<code>_config.yml</code></p><p>修改</p><blockquote><p>permalink: posts&#x2F;:abbrlink.html</p></blockquote><p>为</p><blockquote><p>permalink: posts&#x2F;:abbrlink</p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 随手记 </tag>
+            
+            <tag> node.js </tag>
+            
+            <tag> 问题解决 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>利用NAS远程唤醒内网主机</title>
+      <link href="/posts/18f7/"/>
+      <url>/posts/18f7/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="WolGoWeb"><a href="#WolGoWeb" class="headerlink" title="WolGoWeb"></a>WolGoWeb</h1><p>WolGoWeb是一款远程唤醒WebAPI工具，主要用于搭建在局域网服务器或NAS中，实现WebAPI唤醒局域网内主机。</p><blockquote><p>在使用该工具前，首先要确认需要唤醒的主机支持WOL功能并且已经开启。</p></blockquote><h1 id="部署说明"><a href="#部署说明" class="headerlink" title="部署说明"></a>部署说明</h1><h2 id="1、Docker-compose部署（推荐）"><a href="#1、Docker-compose部署（推荐）" class="headerlink" title="1、Docker-compose部署（推荐）"></a>1、Docker-compose部署（推荐）</h2><p>使用 Docker-compose 可以十分便捷的部署 WolGoWeb 工具，首先要确保服务器中已经安装了 Docker 和 Docker-compose。</p><p>创建一个<code>docker-compose.yml</code>文件：</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">wol-go-web:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">chishin/wol-go-web:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">WolGoWeb</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PORT=9090</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">KEY=false</span></span><br></pre></td></tr></table></figure><p>启动容器：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pull</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure><p>到此部署已经完成，如果需要升级到最新版本，可直接执行以下命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down</span><br><span class="line">docker-compose pull</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure><h2 id="2、Docker直接部署"><a href="#2、Docker直接部署" class="headerlink" title="2、Docker直接部署"></a>2、Docker直接部署</h2><p>使用 Docker 部署 WolGoWeb 工具：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --net=host chishin/wol-go-web</span><br></pre></td></tr></table></figure><p>如果需要指定端口可以使用下面的命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --net=host --env PORT=端口号 chishin/wol-go-web</span><br></pre></td></tr></table></figure><h3 id="环境说明："><a href="#环境说明：" class="headerlink" title="环境说明："></a>环境说明：</h3><table><thead><tr><th>参数名称</th><th>描述</th><th>备注</th></tr></thead><tbody><tr><td>PORT</td><td>开放服务端口</td><td>默认：9090</td></tr><tr><td>WEB</td><td>是否启用Web页面</td><td>默认：<code>true</code></td></tr><tr><td>USERNAME</td><td>设置Web页面登陆账号</td><td>仅在启用Web页面时，且<code>USERNAME</code>与<code>PASSWORD</code>都不为空时生效</td></tr><tr><td>PASSWORD</td><td>设置Web页面登陆密码</td><td>仅在启用Web页面时，且<code>USERNAME</code>与<code>PASSWORD</code>都不为空时生效</td></tr><tr><td>KEY</td><td>API权限验证KEY</td><td>默认：<code>false</code>不进行权限验证，详见<a href="https://github.com/xiaoxinpro/WolGoWeb#4api%E6%9D%83%E9%99%90%E9%AA%8C%E8%AF%81">API权限验证说明</a></td></tr></tbody></table><h2 id="3、群晖Docker部署"><a href="#3、群晖Docker部署" class="headerlink" title="3、群晖Docker部署"></a>3、群晖Docker部署</h2><p>群晖系统可以在Docker应用的 <strong>注册表</strong> 中搜索 <code>wol-go-web</code>，即可下载和部署项目。</p><p>更多图文教程可以参考<a href="https://github.com/xiaoxinpro/WolGoWeb/blob/master/docker/README.md">群晖Docker部署</a></p><h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="1、验证部署成功"><a href="#1、验证部署成功" class="headerlink" title="1、验证部署成功"></a>1、验证部署成功</h2><p>完成部署工作即可开始使用，首先使用浏览器访问 <code>http://服务器IP或域名:9090</code>，如果修改了端口号请访问对应的端口。</p><p><img src="/posts/18f7/image-20240808101653740.png" alt="image-20240808101653740"></p><p>看到以上界面表示服务部署成功。</p><h2 id="2、发送唤醒请求"><a href="#2、发送唤醒请求" class="headerlink" title="2、发送唤醒请求"></a>2、发送唤醒请求</h2><p>可以直接使用浏览器访问 <code>http://服务器IP或域名:9090/wol?mac=需要唤醒主机的MAC地址</code> 当出现以下界面表示唤醒命令发送成功。</p><p><img src="/posts/18f7/image-20240808101838486.png" alt="image-20240808101838486"></p><h2 id="3、唤醒请求参数"><a href="#3、唤醒请求参数" class="headerlink" title="3、唤醒请求参数"></a>3、唤醒请求参数</h2><table><thead><tr><th>参数名称</th><th align="left">描述</th><th align="left">备注</th></tr></thead><tbody><tr><td>mac</td><td align="left">唤醒主机的MAC地址</td><td align="left">必填</td></tr><tr><td>ip</td><td align="left">唤醒主机的IP地址</td><td align="left">默认：255.255.255.255</td></tr><tr><td>port</td><td align="left">唤醒命令发送的端口</td><td align="left">默认：9</td></tr></tbody></table><h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>最后，贴上原地址方便查看更新信息。</p><p><a href="https://github.com/xiaoxinpro/WolGoWeb">Github链接</a></p><p><a href="https://hub.docker.com/r/chishin/wol-go-web">DockerHub链接</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> NAS </tag>
+            
+            <tag> 随手记 </tag>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>markdown写法记录</title>
+      <link href="/posts/8ffd/"/>
+      <url>/posts/8ffd/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h1 id="markdown写法记录"><a href="#markdown写法记录" class="headerlink" title="markdown写法记录"></a>markdown写法记录</h1><h2 id="段落语法"><a href="#段落语法" class="headerlink" title="段落语法"></a>段落语法</h2><blockquote><p>要创建段落，请使用<strong>空白行</strong>将一行或多行文本进行分隔。不要用空格或制表符缩进段落。</p></blockquote><h2 id="引用语法"><a href="#引用语法" class="headerlink" title="引用语法"></a>引用语法</h2><blockquote><p><strong>要创建块引用，请在段落前添加一个 <code>&gt;</code> 符号。</strong></p></blockquote><h2 id="换行语法"><a href="#换行语法" class="headerlink" title="换行语法"></a>换行语法</h2><blockquote><p>在文章最后添加<strong>两个空格</strong>然后回车键换行</p></blockquote><h2 id="强调语法"><a href="#强调语法" class="headerlink" title="强调语法"></a>强调语法</h2><blockquote><p><strong>要加粗文本，请在单词或短语的前后各添加两个星号或下划线</strong></p></blockquote><blockquote><p><em>要用斜体显示文本，请在单词或短语前后添加一个星号或下划线</em></p></blockquote><blockquote><p><em><strong>要同时用粗体和斜体突出显示文本，请在单词或短语的前后各添加三个星号或下划线。</strong></em></p></blockquote><h2 id="代码语法"><a href="#代码语法" class="headerlink" title="代码语法"></a>代码语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">print</span>(<span class="string">&#x27;这里是代码段&#x27;</span>)</span><br></pre></td></tr></table></figure><h2 id="链接语法"><a href="#链接语法" class="headerlink" title="链接语法"></a>链接语法</h2><p><a href="https://markdown.com.cn/">Markdown语法</a>。</p><h3 id="给链接增加-Title"><a href="#给链接增加-Title" class="headerlink" title="给链接增加 Title"></a>给链接增加 Title</h3><p>这是一个链接 <a href="https://markdown.com.cn/" title="最好的markdown教程">Markdown语法</a>。</p><h3 id="网址和Email地址"><a href="#网址和Email地址" class="headerlink" title="网址和Email地址"></a>网址和Email地址</h3><p><a href="https://markdown.com.cn/">https://markdown.com.cn</a><br><a href="mailto:&#102;&#x61;&#x6b;&#x65;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#109;">fake@example.com</a></p><h2 id="图片语法"><a href="#图片语法" class="headerlink" title="图片语法"></a>图片语法</h2><p><img src="/posts/8ffd/image-20240607145454960-7743305.png" alt="image-20240607145454960"></p><h3 id="链接图片"><a href="#链接图片" class="headerlink" title="链接图片"></a>链接图片</h3><blockquote><p>不知道为啥写不对 <a href="https://markdown.com.cn/"><img src="/posts/8ffd/image-20240607145454960-7743305.png" alt="image-20240607145454960" style="zoom:25%;"></a></p></blockquote><h2 id="表格写法"><a href="#表格写法" class="headerlink" title="表格写法"></a>表格写法</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| Syntax      | Description |</span><br><span class="line">| ----------- | ----------- |</span><br><span class="line">| Header      | Title       |</span><br><span class="line">| Paragraph   | Text        |</span><br></pre></td></tr></table></figure><table><thead><tr><th>Syntax</th><th>Description</th></tr></thead><tbody><tr><td>Header</td><td>Title</td></tr><tr><td>Paragraph</td><td>Text</td></tr></tbody></table><h2 id="删除线写法"><a href="#删除线写法" class="headerlink" title="删除线写法"></a>删除线写法</h2><p><del>我被删除了</del> 这里是删除线</p><h2 id="任务列表语法"><a href="#任务列表语法" class="headerlink" title="任务列表语法"></a>任务列表语法</h2><ul><li><input checked disabled type="checkbox"> Write the press release</li><li><input checked disabled type="checkbox"> Update the website</li><li><input disabled type="checkbox"> Contact the media</li></ul><h2 id="使用-Emoji-表情"><a href="#使用-Emoji-表情" class="headerlink" title="使用 Emoji 表情"></a>使用 Emoji 表情</h2><h3 id="复制和粘贴表情符号"><a href="#复制和粘贴表情符号" class="headerlink" title="复制和粘贴表情符号"></a>复制和粘贴表情符号</h3><p><a href="https://gist.github.com/rxaviers/7360908">表情符号简码列表</a></p><h3 id="使用表情符号简码"><a href="#使用表情符号简码" class="headerlink" title="使用表情符号简码"></a>使用表情符号简码</h3><p>真好笑！ :joy: :smiley:</p><p><a href="https://gist.github.com/rxaviers/7360908">表情符号简码列表</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 随手记 </tag>
+            
+            <tag> 记性不好 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
